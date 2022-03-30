@@ -1,0 +1,83 @@
+{% extends 'index.html'%}
+{%load static%}
+{% block content %}
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic Grid</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
+
+        body {
+            background: white;
+            color: #fff;
+            font-family: 'Noto Sans', sans-serif;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #353535;
+            font-size: 3rem;
+            color: #fff;
+            box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem, rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
+            height: 200px;
+            width: 100%;
+            border-radius: 4px;
+            transition: all 500ms;
+            overflow: hidden;
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .card:hover {
+            box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
+            transform: translateY(-3px) scale(1.1);
+            background-color: rgba(0,0,0,0.5);
+       
+
+        }
+
+        .basic-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        }
+        #p{
+            color: transparent;
+        }
+        #p:hover {
+            color: black;
+            transition: 0.6s ease;
+            opacity: 1;
+        }
+       
+       
+    </style>
+</head>
+
+<body style="background-color: #082835;">
+
+    <hr style="color: white;">
+    
+       <h4 style="color: black;"> <a href="{%url 'new_page' 1 %}">{{man.category_name}}</a>/<a href="{%url 'sub' 1 man.sub_category1 %}">{{man.sub_category1}}</a>/<a href="{%url 'sub' 1 man.sub_category2 %}">{{man.sub_category2}}</a>/<a href="{%url 'sub' 1 man.sub_category3 %}">{{man.sub_category3}}</a>/<a href="{%url 'sub' 1 man.sub_category4 %}">{{man.sub_category4}}</a>/<a href="{%url 'sub' 1 man.sub_category5 %}">{{man.sub_category5}}</a>
+    </h4><br><br><br>
+
+    <section class="basic-grid">
+        {% for i in man1%}
+        <div class="card" 
+        style="background-image:url({{i.gib.url}})">
+        
+        <p id="p">{{i.modelname}}</p>
+        
+    </div>
+    {% endfor %}
+    </section>
+
+</body>
+{% endblock %}

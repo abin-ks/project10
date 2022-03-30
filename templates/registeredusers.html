@@ -1,0 +1,87 @@
+{% extends 'admin_base.html' %}  {% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Registered Users</title>
+
+  </head>
+  <body>
+      <!-- partial -->
+          <div class="row">
+            <div class="col-12 p-0">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Registered Users</h4>
+                  <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-12">
+                      <input type="text" id="myInput" onkeyup="myFunction()" class="form-control" placeholder="Search User" style="width:100%"/>
+                    </div>
+                  </div><br>
+                  <div class="table-responsive">
+                    <table id="myTable" class="table table-striped">
+                      <thead>
+                        <tr class="header">
+                        
+                          
+                          <div class="col-md-lg-6 ">
+                            <th>Sl No.</th>
+                          <th>Full Name</th>
+                          <th>Username</th>
+                          <th>E-mail</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+
+                      {% for i in use %}
+                      <tbody>
+                        <tr>
+                          <td>{{forloop.counter}}</td>
+                          <td>{{i.fullname}}</td>
+                          <td id="username2">{{i.username}}</td>
+                          <td>{{i.email}}</td>
+                          <td>
+                            <a href="{% url 'delete' i.reg_id %}">
+                                <button type="button" class="btn btn-outline-danger">
+                                    <i class="icon-trash menu-icon"></i>
+                                  Delete
+                                </button>
+                              </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                      {% endfor %}
+                    </table>
+                  </div>
+                  </div>
+                  <script>
+                    function myFunction() {
+                      // Declare variables
+                      var input, filter, table, tr, td, i, txtValue;
+                      input = document.getElementById("myInput");
+                      filter = input.value.toUpperCase();
+                      table = document.getElementById("myTable");
+                      tr = table.getElementsByTagName("tr");
+                    
+                      // Loop through all table rows, and hide those who don't match the search query
+                      for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[0];
+                        if (td) {
+                          txtValue = td.textContent || td.innerText;
+                          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                          } else {
+                            tr[i].style.display = "none";
+                          }
+                        }
+                      }
+                    }
+                    </script>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </body>
+</html>
+{% endblock %}
