@@ -1,6 +1,7 @@
 {% extends 'index.html'%}
 {%load static%}
 {% block content %}
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,6 +14,7 @@
             background: white;
             color: #fff;
             font-family: 'Noto Sans', sans-serif;
+            padding: 10px;
         }
 
         .card {
@@ -38,8 +40,8 @@
         .card:hover {
             box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
             transform: translateY(-3px) scale(1.1);
-            background-color: rgba(0,0,0,0.5);
-       
+            background-color: rgba(0, 0, 0, 0.5);
+
 
         }
 
@@ -48,37 +50,71 @@
             gap: 1rem;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
         }
-        #p{
+
+        #p {
             color: transparent;
         }
+
         #p:hover {
             color: black;
             transition: 0.6s ease;
             opacity: 1;
         }
-       
-       
+        @media(max-width:61em){
+            .nav-tabs{
+                padding-top: 10px;
+            }
+        }
     </style>
 </head>
 
 <body style="background-color: #082835;">
-
     <hr style="color: white;">
-    
-       
-       <h4 style="color: black;"><a>{{man.category_name}}</a>/<a href="{%url 'sub' 1 man.sub_category1 %}">{{man.sub_category1}}</a>/<a href="{%url 'sub' 1 man.sub_category2 %}">{{man.sub_category2}}</a>/<a href="{%url 'sub' 1 man.sub_category3 %}">{{man.sub_category3}}</a>/<a href="{%url 'sub' 1 man.sub_category4 %}">{{man.sub_category4}}</a>/<a href="{%url 'sub' 1 man.sub_category5 %}">{{man.sub_category5}}</a>
-    </h4><br><br><br>
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown1"
+            aria-controls="navbarNavDropdown1" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-start" id="navbarNavDropdown1">
+            <ul class="navbar-nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active text-dark" aria-current="page"
+                        href="#">{{man.category_name}}</a>
+                </li>&nbsp;
+                <li class="nav-item">
+                    <a class="nav-link active text-dark" aria-current="page"
+                        href="{% url 'sub' man.cat_id man.sub_category1 %}">{{man.sub_category1}}</a>
+                </li>&nbsp;
+                <li class="nav-item">
+                    <a class="nav-link active text-dark" aria-current="page"
+                        href="{% url 'sub' man.cat_id man.sub_category2 %}">{{man.sub_category2}}</a>
+                </li>&nbsp;
+                <li class="nav-item">
+                    <a class="nav-link active text-dark" aria-current="page"
+                        href="{% url 'sub' man.cat_id man.sub_category3 %}">{{man.sub_category3}}</a>
+                </li>&nbsp;
+                <li class="nav-item">
+                    <a class="nav-link active text-dark" aria-current="page"
+                        href="{% url 'sub' man.cat_id man.sub_category4 %}">{{man.sub_category4}}</a>
+                </li>&nbsp;
+                <li class="nav-item">
+                    <a class="nav-link active text-dark" aria-current="page"
+                        href="{% url 'sub' man.cat_id man.sub_category5 %}">{{man.sub_category5}}</a>
+                </li>&nbsp;
+            </ul>
+        </div>
+    </nav>
 
     <section class="basic-grid">
         {% for i in man1%}
-        <a style="text-decoration: none;" href="{% url 'modelshow' i.id%}" ><div class="card" 
-        style="background-image:url({{i.gib.url}})">
-        
-        <p id="p">{{i.modelname}}</p>
-        
-    </div></a>
-    {% endfor %}
-    </section>
+        <a style="text-decoration: none;" href="{% url 'modelshow' i.id %}">
+            <div class="card" style="background-image:url({{i.gib.url}})">
 
+                <p id="p">{{i.modelname}}</p>
+
+            </div>
+        </a>
+        {% endfor %}
+    </section>
 </body>
 {% endblock %}

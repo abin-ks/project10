@@ -31,14 +31,16 @@
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         grid-template-rows: minmax(100px, auto);
         margin: 10px;
+        margin-top: 10px;
         grid-auto-flow: dense;
         grid-gap: 10px;
     }
 
     .contra .box {
         background: #082835;
-        width: 150px;
-        height: 150px;
+        border-radius: 10px;
+        width: 250px;
+        height: 250px;
         display: grid;
         text-align: center;
         color: #fff;
@@ -47,6 +49,7 @@
 
     .contra .box:hover {
         background: black;
+        
     }
 
     .contra .box img {
@@ -69,6 +72,7 @@
         justify-content: center;
         opacity: 0;
         transition: opacity 0.25s;
+        border-radius: 10px;
     }
 
     .image__overlay--blur {
@@ -253,24 +257,29 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="home">
-                {% for k in it %}
-                <section>
-                    <div class="contra">
-                        <div class="box"
-                            style="background-image: url(media/{{k.category_logo}});background-size: cover;">
-                            <a class="image__overlay image__overlay--blur" href="{% url 'new_page' k.cat_id %}">
-                                <div class="content">
-                                    <div>
-                                        <div class="image__title">{{k.category_name}}<span
-                                                style="position: absolute; font-size: 50px;color: skyblue;margin-top: -18px; margin-left: 5px;">></span>
+                <div class="row">
+                    {% for k in it %}
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-12">
+                        <section>
+                            <div class="contra">
+                                <div class="box"
+                                    style="background-image: url(media/{{k.category_logo}});background-size: cover;">
+                                    <a class="image__overlay image__overlay--blur" href="{% url 'new_page' k.cat_id %}">
+                                        <div class="content">
+                                            <div>
+                                                <div class="image__title">{{k.category_name}}<span
+                                                        style="position: absolute; font-size: 50px;color: skyblue;margin-top: -18px; margin-left: 5px;">></span>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
+                            </div>
+                        </section>
                     </div>
-                </section>
-                {% endfor %}
+
+                    {% endfor %}
+                </div>
             </div>
 
             {% for k in it %}
@@ -308,7 +317,7 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-2">
+            <div class="col-lg-2 col-md-2 col-sm-12 col-12">
                 <div style="height: 125px;width: 125px; background-color: #11303d; border-radius: 40%;padding:12px ">
 
                     <span class="iconify" data-icon="arcticons:priceconverter" style="color:gold;"
@@ -316,7 +325,7 @@
                 </div>
 
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                 <div class="row">
                     <div class="col">
                         <br>
@@ -333,7 +342,7 @@
                 </div>
 
             </div>
-            <div class="col-2">
+            <div class="col-lg-2 col-md-2 col-sm-12 col-12">
                 <div style="height: 125px;width: 125px; background-color: #11303d; border-radius: 40%;padding:12px ">
 
                     <span class="iconify" data-icon="arcticons:priceconverter" style="color:gold;"
@@ -341,7 +350,7 @@
                 </div>
 
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                 <div class="row">
                     <div class="col">
                         <br>
@@ -362,7 +371,7 @@
 
         </div>
         <div class="row">
-            <div class="col-2">
+            <div class="col-lg-2 col-md-2 col-sm-12 col-12">
                 <div style="height: 125px;width: 125px; background-color: #11303d; border-radius: 40%;padding:12px ">
 
                     <span class="iconify" data-icon="arcticons:priceconverter" style="color:gold;"
@@ -370,7 +379,7 @@
                 </div>
 
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                 <div class="row">
                     <div class="col">
                         <br>
@@ -388,7 +397,7 @@
                 </div>
 
             </div>
-            <div class="col-2">
+            <div class="col-lg-2 col-md-2 col-sm-12 col-12">
                 <div style="height: 125px;width: 125px; background-color: #11303d; border-radius: 40%;padding:12px ">
 
                     <span class="iconify" data-icon="arcticons:priceconverter" style="color:gold;"
@@ -396,7 +405,7 @@
                 </div>
 
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                 <div class="row">
                     <div class="col">
                         <br>
