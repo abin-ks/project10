@@ -12,7 +12,8 @@ def home(request):
 
 def test_page(request):
     it = categories.objects.all()
-    return render(request, 'test_page.html',{'it': it})
+    its = items.objects.all()
+    return render(request, 'test_page.html',{'it': it, 'its': its})
 
 
 def modelshow(request, id):

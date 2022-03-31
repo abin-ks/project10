@@ -1,253 +1,183 @@
-<!doctype html>
-<html lang="en">
+{% extends 'index.html'%}
+{%load static%}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    .cardi {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #353535;
+        color: #fff;
+        box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem, rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
 
-    <title>Bootstrap 5 Tabs</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500&display=swap');
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Rubik', sans-serif;
-            text-decoration: none;
-        }
+        width: 100%;
+        border-radius: 4px;
+        transition: all 500ms;
+        overflow: hidden;
 
-        section {
-            display: flex;
-            align-self: center;
-            background: #222;
-        }
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
 
-        .contra {
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            grid-template-rows: minmax(100px, auto);
-            margin: 10px;
-            grid-auto-flow: dense;
-            grid-gap: 10px;
-        }
 
-        .contra .box {
-            background: #333;
-            width: 150px;
-            height: 150px;
-            display: grid;
-            text-align: center;
-            color: #fff;
-            transition: 0.5s;
-        }
 
-        .contra .box:hover {
-            background: black;
-        }
+    .basic-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+    .card {
+        color: transparent;
+    }
 
-        .contra .box img {
-            position: grid;
-
-        }
-
-        .image__overlay {
-            position: relative;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            color: #ffffff;
-            font-family: 'Quicksand', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.25s;
-        }
-
-        .image__overlay--blur {
-            backdrop-filter: blur(5px);
-        }
-
-        .image__overlay>* {
-            transform: translateY(20px);
-            transition: transform 0.25s;
-        }
-
-        .image__overlay:hover {
-            opacity: 1;
-        }
-
-        .image__overlay:hover>* {
-            transform: translateY(0);
-        }
-
-        .image__title {
-            font-size: 1.75em;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .contra .box:nth-child(1) {
-            grid-column: span 2;
-            grid-row: span 1;
-        }
-
-        .contra .box:nth-child(2) {
-            grid-column: span 1;
-            grid-row: span 2;
-        }
-
-        .contra .box:nth-child(3) {
-            grid-column: span 1;
-            grid-row: span 2;
-        }
-
-        .contra .box:nth-child(4) {
-            grid-column: span 1;
-            grid-row: span 2;
-        }
-
-        .contra .box:nth-child(5) {
-            grid-column: span 3;
-            grid-row: span 1;
-        }
-
-        .contra .box:nth-child(7) {
-            grid-column: span 2;
-            grid-row: span 1;
-        }
-
-        .contra .box:nth-child(8) {
-            grid-column: span 1;
-            grid-row: span 2;
-        }
-
-        .contra .box:nth-child(10) {
-            grid-column: span 2;
-            grid-row: span 1;
-        }
-
-        .contra .box:nth-child(12) {
-            grid-column: span 3;
-            grid-row: span 1;
-        }
-
-        .contra .box:nth-child(15) {
-            grid-column: span 3;
-            grid-row: span 1;
-        }
-
-        .contra .box:nth-child(16) {
-            grid-column: span 1;
-            grid-row: span 2;
-        }
-
-        .contra .box:nth-child(17) {
-            grid-column: span 2;
-            grid-row: span 1;
-        }
-
-        .contra .box:nth-child(20) {
-            grid-column: span 3;
-            grid-row: span 1;
-        }
-
-        a {
-            text-decoration: none;
-            text-align: center;
-        }
-
-        @media (max-width: 991px) {
-            .contra {
-                grid-template-columns: repeat(auto-fil, minmax(50%, 1fr));
-                grid-template-rows: minmax(auto, auto);
-            }
-
-            .contra .box {
-                grid-column: unset !important;
-                grid-row: unset !important;
-            }
-        }
-    </style>
-</head>
+    .card:hover {
+        box-shadow: 20px 20px 80px -44px #000;
+        transition: .5s ease-in-out;
+        cursor: pointer;
+        color: black;
+    }
+    .card:hover h5{
+        color: green;
+    }
+</style>
 
 <body>
-    <div class="container mt-2">
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" data-bs-toggle="tab" href="#home">Home</a>
-            </li>
 
-            {% for k in it %}
-            <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#{{k.category_name}}">{{k.category_name}}</a>
-            </li>
-            {% endfor %}
 
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane active" id="home">
-                {% for k in it %}
-                <section>
-                    <div class="contra">
-                        <div class="box"
-                            style="background-image: url(media/{{k.category_logo}});background-size: cover;">
-                            <a class="image__overlay image__overlay--blur" href="{% url 'new_page' k.cat_id %}">
-                                <div class="content">
-                                    <div>
-                                        <div class="image__title">{{k.category_name}}<span
-                                                style="position: absolute; font-size: 50px;color: skyblue;margin-top: -18px; margin-left: 5px;">></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+    <div class="container mt-4 d-flex mb-5">
+        <div class="row">
+            {% for k in its %}
+            <div class="col-md-4 mt-5">
+                <div class="card">
+                    <img src="{{k.gib.url}}" class="card-img-top w-100" />
+                    <div class="card-body">
+                        <h2 class="card-title">{{k.modelname}}</h2>
+                        <div class="d-flex justify-content-between">
+                            <p class="card-text">{{k.description}}</p>
+                            
+                            {% if k.price == '0' %}
+                            <h5 class="card-text mr-4">Free</h5>
+                            {% else %}                            
+                            <h5 class="card-text mr-4">{{k.price}}</h5>
+                            {% endif %} 
                         </div>
+                        <a href="" class="card-link text-decoration-none" data-toggle="modal" data-target="#modalId{{k.id}}">More</a>
                     </div>
-                </section>
-                {% endfor %}
-            </div>
-
-            {% for k in it %}
-
-            <div class="tab-pane" id="{{k.category_name}}">
-                <section>
-                    <div class="container contra">
-                        <div class="box"
-                            style="background-image: url(media/{{k.category_logo}});background-size: cover;">
-                            <a class="image__overlay image__overlay--blur" href="{% url 'new_page' k.cat_id %}">
-                                <div class="content">
-                                    <div>
-                                        <div class="image__title">{{k.category_name}}<span
-                                                style="position: absolute; font-size: 50px;color: skyblue;margin-top: -18px; margin-left: 5px;">></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </section>
+                </div>
             </div>
             {% endfor %}
-
         </div>
-
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-        crossorigin="anonymous"></script>
 
 
-</body>
+    <!-- Modal Code -->
+    {% for k in its %}
+    <div class="modal fade pt-5" id="modalId{{k.id}}">
+        <div class="modal-dialog bg-success">
+            <div class="modal-content" style="transform: scaleX(1.4);">
+                <div class="modal-header pb-2">
+                    <h1 class="font-weight-light ml-4">{{k.description}}</h1>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <hr style="color: white;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <img src="{{k.gib.url}}" height="350px" width="100%">
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="cardi">
+                                    <div class="card-title">
+                                        <br>
+                                        <br>
+                                        <h3>Product Details</h3>
+                                    </div>
+                                    <div class="cardi-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <table class="table table-responsive text-light">
+                                                    <tr>
+                                                        <td>Model Name</td>
+                                                        <td>{{k.modelname}}</td>
 
-</html>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Description</td>
+                                                        <td>{{k.description}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Price</td>
+                                                        <td>{{k.price}} $</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Type</td>
+                                                        <td>{{k.types}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Format</td>
+                                                        <td>{{k.format}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Model Type</td>
+                                                        <td>{{k.modeltype}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Category</td>
+                                                        <td>{{k.cat_id.category_name}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href=""><button class="btn btn-primary">
+                                                                    Buy_NOW</button></a></td>
+                                                        <td><a href=""><button
+                                                                    class="btn btn-info">Add2Cart</button></a></td>
+                                                    </tr>
+
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <script>
+
+        $(document).ready(function () {
+            $(".card-link").click(function () {
+                $(".rounded").attr("src", $(this).parent().siblings().attr("Src"));
+                $(".product_name").text($(this).siblings("h2").text());
+                $(".product_desc").text($(this).siblings("div").find("p:nth(0)").text());
+                $(".product_price").text($(this).siblings("div").find("p:nth(1)").text());
+            });
+            $(window).resize(function () {
+                if ($(window).width() < 600) {
+                    $(".modal-content").css("transform", "scaleX(1)");
+                }
+                else {
+                    $(".modal-content").css("transform", "scaleX(1.4)");
+                }
+            });
+        });
+
+
+    </script>
+    {% endblock %}
